@@ -7,34 +7,26 @@ static const unsigned int systraypinning = 0;	/* 0: sloppy systray follows selec
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;     /* 0 means no systray */
-static const unsigned int gappih    = 15;       /* horiz inner gap between windows */
-static const unsigned int gappiv    = 15;       /* vert inner gap between windows */
-static const unsigned int gappoh    = 16;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 16;       /* vert outer gap between windows and screen edge */
+static const unsigned int gappih    = 5;       /* horiz inner gap between windows */
+static const unsigned int gappiv    = 5;       /* vert inner gap between windows */
+static const unsigned int gappoh    = 6;       /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 6;       /* vert outer gap between windows and screen edge */
 static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */ 
-static const int topbar             = 1;        /* 0 means bottom bar */ 
-static const char *fonts[]          = { "monospace:size=10","FontAwesome:pixelsize=20:antialias=true:autohint=true" };
-//static const char *fonts[]          = { "monospace:size=10" };
+static const int topbar             = 0;        /* 0 means bottom bar */ 
+static const char *fonts[]          = { "monospace:size=10","FontAwesome:pixelsize=12:antialias=true:autohint=true" };
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const char dmenufont[]       = "monospace:size=10";
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
 static char selfgcolor[]            = "#eeeeee";
-
-static const char col_gray1[]	    = "#282a36";
-static const char col_gray2[]	    = "#ffb86c";
-static const char col_gray3[]       = "#ff79c6";
-static const char col_gray4[]       = "#ffb86c";
-static const char col_cyan[]        = "#282a36";
-
-static char selbordercolor[]	    = "#a9a1e1";
-static char selbgcolor[]	    = "#a9a1e1";
+static char selbordercolor[]        = "#005577";
+static char selbgcolor[]            = "#005577";
 static char *colors[][3] = {
        /*               fg           bg           border   */
-       [SchemeNorm] = { col_gray3, col_gray1, col_cyan },
-       [SchemeSel]  = { col_gray4,  col_cyan,  col_gray2  },
+       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
+       [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
 };
 
 /* tagging */
@@ -89,11 +81,11 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-b", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
-static const char *roficmd[] = { "rofi", "-show", "drun", "-show-icons", NULL };
+static const char *termcmd[]  = { "st", NULL };
+
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_d,      spawn,          {.v = roficmd } },
+	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,		        		XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,						XK_n,	   spawn,	       SHCMD("$TERMINAL -e ranger") },
     { MODKEY,                       XK_v,      spawn,          SHCMD("$TERMINAL -e newsboat") },
@@ -105,7 +97,7 @@ static Key keys[] = {
 	STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ShiftMask,                push)
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_p,      incnmaster,     {.i = -1 } },
+	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY|Mod1Mask,              XK_h,      incrgaps,       {.i = +1 } },
@@ -126,7 +118,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_o,      incrovgaps,     {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,  						XK_q,      killclient,     {0} },
+	{ MODKEY,  						XK_q,      killclient,     {0} },
 	{ MODKEY,			XK_f,	   togglefullscr,  {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} },
@@ -156,7 +148,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_c,      quit,	   {0} },
+	{ MODKEY|ShiftMask,             XK_q,      spawn,          SHCMD("qoptions") },
 };
 
 /* button definitions */
