@@ -13,3 +13,5 @@ Here are some details about my setup ..
 
  <img src="https://raw.githubusercontent.com/maxutka99/dotfiles/main/scr1.png" width="800px"/>
 </a>
+ <img src="https://raw.githubusercontent.com/maxutka99/dotfiles/main/scr2.png" width="800px"/>
+</a>
