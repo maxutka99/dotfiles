@@ -10,3 +10,6 @@ Here are some details about my setup ..
 - **Notify Daemon**                • [Dunst](https://github.com/dunst-project/dunst) 
 - **Application Launcher**         • [Rofi](https://github.com/davatorium/rofi)
 - **File Manager**                 • [Thunar](https://github.com/xfce-mirror/thunar)
+
+ <img src="https://raw.githubusercontent.com/maxutka99/dotfiles/main/scr1.png" width="800px"/>
+</a>
